@@ -7,18 +7,44 @@ Things you may want to cover:
 
 * Ruby version
 
-* System dependencies
+```
+ruby 2.5.1
+Rails 5.2.2
+```
 
-* Configuration
+* Set up
 
-* Database creation
+```
+$ docker-compose run web rails new . --force --database=mysql --skip-bundle
+```
 
-* Database initialization
+```
+$ docker-compose build
+```
 
-* How to run the test suite
+* Change files
 
-* Services (job queues, cache servers, search engines, etc.)
+config/database.yml
 
-* Deployment instructions
+```
+default: &default
+  adapter: mysql2
+  encoding: utf8
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  username: root
+  password: password
+  host: db
+```
+
+```
+$ docker-compose up
+```
+
+* Create database
+
+```
+$ docker-compose run web rake db:create
+```
+
 
 * ...
